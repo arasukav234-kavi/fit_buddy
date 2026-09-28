@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Your FitBuddy Plan</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1>FitBuddy</h1>
+        <p>Your Personalized Fitness Plan</p>
+    </div>
+</header>
+<main class="container">
+    {% if message %}
+    <div class="success">{{ message }}</div>
+    {% endif %}
+    <section class="card">
+        <h2>Hello, {{ user.name }} 👋</h2>
+        <p>Age: {{ user.age }} | Weight: {{ user.weight }} kg | Goal: {{ user.goal }} | Intensity: {{ user.intensity }}</p>
+    </section>
+    <section class="card">
+        <h2>7-Day Workout Plan</h2>
+        <pre>{{ plan.updated_plan or plan.original_plan }}</pre>
+    </section>
+    <section class="card">
+        <h2>Nutrition / Recovery Tip</h2>
+        <p>{{ plan.nutrition_tip }}</p>
+    </section>
+    <section class="card">
+        <h2>Give Feedback</h2>
+        <form action="/submit-feedback" method="post">
+            <input type="hidden" name="user_id" value="{{ user.user_id }}">
+            <textarea name="feedback" rows="5" required placeholder="Tell FitBuddy what you want changed"></textarea>
+            <button>Revise My Plan</button>
+        </form>
+    </section>
+    <a class="button" href="/">Create Another Plan</a>
+</main>
+</body>
+</html>

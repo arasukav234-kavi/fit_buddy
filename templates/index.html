@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>FitBuddy</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1>FitBuddy</h1>
+        <p>AI Fitness Plan Generator</p>
+    </div>
+</header>
+<main class="container">
+    <section class="card">
+        <h2>Create Your 7-Day Plan</h2>
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+        <form action="/generate-workout" method="post">
+            <div class="grid">
+                <label>User ID<input name="user_id" required></label>
+                <label>Name<input name="name" required></label>
+                <label>Age<input name="age" type="number" min="13" max="100" required></label>
+                <label>Weight (kg)<input name="weight" type="number" step="0.1" required></label>
+                <label>Goal
+                    <select name="goal" required>
+                        <option value="">Select</option>
+                        <option value="weight loss">Weight Loss</option>
+                        <option value="muscle gain">Muscle Gain</option>
+                        <option value="general wellness">General Wellness</option>
+                        <option value="flexibility">Flexibility</option>
+                    </select>
+                </label>
+                <label>Intensity
+                    <select name="intensity" required>
+                        <option value="">Select</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </label>
+            </div>
+            <button>Generate My Plan</button>
+        </form>
+    </section>
+    <section class="card">
+        <p>General fitness information only; not medical advice.</p>
+    </section>
+</main>
+</body>
+</html>
